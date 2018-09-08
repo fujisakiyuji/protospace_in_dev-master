@@ -14,7 +14,7 @@
         .col-md-12
           .cover-image-upload
             /クリックした時に画像選択をさせている
-            %input#prototype_captured_images_attributes_0_name{:name => "prototype[captured_images_attributes][0][name]", :type => "file"}/
+            %input#prototype_captured_images_attributes_0_name{:name => "prototype[captured_images_attributes][0][name]", :type => "file",  :value => "#{@prototype.set_main_thumbnail.large}"}/
             /写真をDBから取得している 機能に関わるので必須
             %img#main_preview{:src => "#{@prototype.set_main_thumbnail.large}"}/
             /必須では無い
