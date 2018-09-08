@@ -371,17 +371,19 @@ body {
     .media-object {
       border-radius: 50%;
     }
+/* -- like button ----------------- */
+    .media-right{
+      button {
+        padding-right: 35px;
 
-    button {
-      padding-right: 35px;
+        img {
+          max-width: 18px;
+          margin-right: 5px;
+        }
 
-      img {
-        max-width: 18px;
-        margin-right: 5px;
-      }
-
-      .num {
-        font-weight: bold;
+        .num {
+          font-weight: bold;
+        }
       }
     }
   }

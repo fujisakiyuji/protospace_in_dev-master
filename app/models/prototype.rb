@@ -1,14 +1,19 @@
 class Prototype < ActiveRecord::Base
   belongs_to :user
-  has_many :users, :through => :prototype_user
+  has_many :users, dependent: :destroy, :through => :like#多対多
   has_many :captured_images, dependent: :destroy
 
+  # accepts_nested_attributes_for :like, allow_destroy: :true
   accepts_nested_attributes_for :captured_images, reject_if: :reject_sub_images
 
   validates :title,
             :catch_copy,
             :concept,
             presence: true
+
+  def like_user(user)
+   likes.find_by(user_id: user)
+  end
 
   def reject_sub_images(attributed)
     attributed['content'].blank?
