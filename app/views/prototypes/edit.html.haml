@@ -1,36 +1,43 @@
-.container.proto-new
-  = form_for @prototype do |f|
-    = f.hidden_field :user_id, value: current_user.id
+%body
+  %form#edit_prototype_720.container.proto-new{"accept-charset" => "UTF-8", :action => "/prototypes/#{@prototype.id}", :enctype => "multipart/form-data", :method => "post"}
+    /日本語設定をしている 必須では無い
+    %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+    /ここで多分ルーティングを設定している 必須
+    %input{:name => "_method", :type => "hidden", :value => "patch"}/
+    /わからんけど送信エラーにおそらく深く関わってる気がする ここ重要だと思う 必須
+    %input{:name => "authenticity_token", :type => "hidden", :value => "waCCr6NQFlc1XVNI0TKo32sA3CzTD7Gdfoc2MAbdAHVPloPwzKmV3ycFO3Y7d8OhHsyyU0OqZh4yqFz3Bwvudg=="}/
     .col-md-8.col-md-offset-2
       %header.row.user-nav.row
         .col-md-12
-          / %h4 Title
-          .proto-new-title
-            = f.text_field :title, required: true, autofocus: true
+          %input#prototype_title.proto-new-title{:name => "prototype[title]", :placeholder => "Title", :type => "text", :value => "#{@prototype.title}"}/
       .row
         .col-md-12
-          / %h4 Main Thumbnail
-          .cover-image-upload#main_image_uploader
-            = f.fields_for :captured_images do |image|
-              %img
-              = image.file_field :content, required: true, value: "#{@prototype.set_main_thumbnail.large}"
-              = image.hidden_field :status, value: "main"
-        .col-md-12
-          / %h4 Sub Thumbnails
-          %ul.proto-sub-list.list-group
-            - 3.times do |i|
-              %li.list-group-item.col-md-4
-                .image-upload
-                  = f.fields_for :captured_images do |image|
-                    %img
-                    = image.file_field :content
-                    = image.hidden_field :status, value: "sub"
+          .cover-image-upload
+            /クリックした時に画像選択をさせている
+            %input#prototype_captured_images_attributes_0_name{:name => "prototype[captured_images_attributes][0][name]", :type => "file"}/
+            /写真をDBから取得している 機能に関わるので必須
+            %img#main_preview{:src => "#{@prototype.set_main_thumbnail.large}"}/
+            /必須では無い
+            %input#prototype_captured_images_attributes_0_property{:name => "prototype[captured_images_attributes][0][property]", :type => "hidden", :value => "main"}/
+            /必須では無い
+            %input#prototype_captured_images_attributes_0_id{:name => "prototype[captured_images_attributes][0][id]", :type => "hidden", :value => "#{'prototype/@prototype.id'}"}/
       .row.proto-description
         .col-md-12
-          / %h4 Catch Copy
-          = f.text_field :catch_copy, require: true, placeholder: "Input Catch Copy"
+          /キャッチコピーテキストの表示
+          %input#prototype_catchcopy{:name => "prototype[catch_copy]", :placeholder => "Catch Copy", :type => "text", :value => "#{@prototype.catch_copy}"}/
         .col-md-12
-          / %h4 Concept
-          = f.text_area :concept, require: true, placeholder: "Input Concept"
+          /コンセプトテキストの表示
+          %textarea#prototype_concept{:cols => "30", :name => "prototype[concept]", :placeholder => "Concept", :rows => "4"}
+            = @prototype.concept
+          .col-md-12
+          %h4 Tag List
+          .row
+            .col-md-3
+              %input#prototype_tag_list_{:name => "prototype[tag_list][]", :placeholder => "Web Design", :type => "text"}/
+            .col-md-3
+              %input#prototype_tag_list_{:name => "prototype[tag_list][]", :placeholder => "UI", :type => "text"}/
+            .col-md-3
+              %input#prototype_tag_list_{:name => "prototype[tag_list][]", :placeholder => "Application", :type => "text"}/
       .row.text-center.proto-btn
-        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"
+        %input.btn.btn-lg.btn-primary.btn-block{:name => "commit", :type => "submit", :value => "Publish"}/
+
