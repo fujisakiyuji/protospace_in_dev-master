@@ -1,5 +1,6 @@
 class PrototypesController < ApplicationController
   before_action :set_prototype, only: [:show, :edit]
+  protect_from_forgery :except => [:edit, :update]
 
   def index
     @prototypes = Prototype.all
