@@ -24,12 +24,14 @@ class PrototypesController < ApplicationController
   end
 
   def edit
+        @prototype = Prototype.find(params[:id])
+
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    prototype.update(prototype_params) if prototype.user_id == current_user.id
-    redirect_to action: :index
+        prototype.update(prototype_params) if prototype.user_id == current_user.id
+        redirect_to action: :index
+
   end
 
   private
