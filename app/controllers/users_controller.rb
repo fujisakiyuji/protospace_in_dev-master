@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     @user.update(user_params)
     redirect_to :root, notice: 'Your user infomation was successfully updated'
   end
-
   private
 
   def set_user

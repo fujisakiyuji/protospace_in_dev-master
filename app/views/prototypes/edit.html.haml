@@ -1,0 +1,6 @@
+.contents.row
+  = form_tag("/prototypes/#{@prototype.id}", method: :patch ) do
+    %h3
+      編集する
+    %textarea{:cols => "30", :name => "text", :placeholder => "text", :rows => "10"}= @prototype.title
+    %input{:type => "submit", :value => "SENT"}/
