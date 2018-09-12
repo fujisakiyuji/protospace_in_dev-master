@@ -1,4 +1,5 @@
 class PrototypesController < ApplicationController
+
   before_action :set_prototype, only: :show
 
   def index
@@ -28,11 +29,10 @@ class PrototypesController < ApplicationController
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    if prototype.user_id == current_user.id
+      prototype = Prototype.find(params[:id])
       prototype.update(prototype_params)
-    end
   end
+
 
   private
 
