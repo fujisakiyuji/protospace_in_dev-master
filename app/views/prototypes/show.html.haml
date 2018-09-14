@@ -37,7 +37,58 @@
           %a{href: "#", class: "btn btn-default"} iPad
         %li
           %a{href: "#", class: "btn btn-default"} wireframe
-  %textarea{:type =>"text",:name=>"text_input",:placeholder=>"input....?",:method=>"post",:style=>"width:800px;height:60px;resize:none;"}
-  %input{:type=>"submit"}
+
+
+= form_tag("/prototypes/#{@prototrpe.id}/comments", method: :post) do
+  %textarea{name: "comment[text]", rows: "3", placeholder: "your comment", class: "textform-controll", id: "comment-text", style: "width:800px;height:60px;resize:none;"}
+  %input{type: "submit", name: "commit", value: "Comment", class: "btn btn-primary"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
