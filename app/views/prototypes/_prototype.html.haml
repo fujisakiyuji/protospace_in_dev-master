@@ -1,4 +1,15 @@
 .col-sm-4.col-md-3.proto-content
+
+  - if user_signed_in? && prototype.user_id == current_user.id
+    .dropdown.drop_menu_location
+      %button#dropdownMenu.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        Action
+      %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+        %li
+        %a{"data-method" => "delete", :href => "/prototypes/#{prototype.id}", :rel => "nofollow"} Delete
+        %li
+        %a{:href => "/prototypes/707/edit"} Edit
+
   .thumbnail
     = link_to image_tag(prototype.set_main_thumbnail), prototype_path(prototype)
     .caption
