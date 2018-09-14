@@ -1,14 +1,24 @@
 class LikesController < ApplicationController
   def create
-    @prototypes = Prototype.new
-    @like = Like.create(user_id: current_user.id, prototype_id: params[:prototype_id])
-    @likes = Like.where(prototype_id: params[:prototype_id])
+    @like = Like.create(prototype_id: like_params[:prototype_id], user_id: current_user.id)
+    @count = Like.where(prototype_id: like_params[:prototype_id]).count
+    respond_to do |format|
+      format.json { render json: @count}
+    end
   end
 
   def destroy
     @like = current_user.likes.find_by(prototype_id: params[:prototype_id])
     @like.destroy
-    @likes = Like.where(prototype_id: params[:prototype_id])
+    @count = Like.where(prototype_id: params[:prototype_id]).count
+    respond_to do |format|
+      format.json { render json: @count}
+    end
+  end
+
+  private
+  def like_params
+    params.permit(:prototype_id)
   end
 
 end

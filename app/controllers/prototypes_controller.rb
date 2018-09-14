@@ -20,7 +20,9 @@ class PrototypesController < ApplicationController
   end
 
   def show
-    @likes_count = Like.count(prototype_id: params[:prototype_id])
+    @prototype = Prototype.find(params[:id])
+    @like = Like.find_by(prototype_id: params[:id])
+    @likes = Like.where(params[:id]).count
   end
 
   private

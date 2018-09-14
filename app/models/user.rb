@@ -4,10 +4,9 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, UserImageUploader
 
-  has_many :prototypes
+
+  has_many :prototypes, :through => :like
   has_many :likes
-  # has_many :prototypes, :through => :like
-    # :through => :like#多対多
 
   validates :name, presence: true
 end
