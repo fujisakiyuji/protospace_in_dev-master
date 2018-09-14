@@ -1,6 +1,10 @@
 class Prototype < ActiveRecord::Base
   belongs_to :user
+
   has_many :users, dependent: :destroy, :through => :like
+
+  has_many :comments
+
   has_many :captured_images, dependent: :destroy
   has_many :likes
 

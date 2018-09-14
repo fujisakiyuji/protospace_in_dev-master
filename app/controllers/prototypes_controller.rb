@@ -21,8 +21,16 @@ class PrototypesController < ApplicationController
 
   def show
     @prototype = Prototype.find(params[:id])
+
     @like = Like.find_by(prototype_id: params[:id])
     @likes = Like.where(prototype_id: params[:id]).count
+
+    @comments = @prototype.comments
+  end
+
+  def destroy
+    prototype = Prototype.find(params[:id])
+    prototype.destroy if prototype.user_id == current_user.id
   end
 
   private
