@@ -1,12 +1,12 @@
 class Prototype < ActiveRecord::Base
   belongs_to :user
 
-  has_many :users, dependent: :destroy, :through => :like
+  has_many :users, dependent: :destroy, :through => :likes
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   has_many :captured_images, dependent: :destroy
-  has_many :likes
+  has_many :likes,dependent: :destroy
 
   accepts_nested_attributes_for :likes, allow_destroy: :like_user
   accepts_nested_attributes_for :captured_images, reject_if: :reject_sub_images

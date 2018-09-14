@@ -1,0 +1,20 @@
+%form#edit_prototype_720.container.proto-new{"accept-charset" => "UTF-8", :action => "/prototypes/#{@prototype.id}", :enctype => "multipart/form-data", :method => "patch"}
+  /ここで多分ルーティングを設定している 必須
+  %input{:name => "_method", :type => "hidden", :value => "patch"}/
+
+  .col-md-12
+    %input#prototype_title.proto-new-title{:name => "prototype[title]", :placeholder => "Title", :type => "text", :value => "#{@prototype.title}"}/
+    /写真をDBから取得している 機能に関わるので必須
+    %img#main_preview{:src => "#{@prototype.set_main_thumbnail.large}"}/
+  .col-md-12
+    /キャッチコピーテキストの表示
+    %input#prototype_catchcopy{:name => "prototype[catch_copy]", :placeholder => "Catch Copy", :type => "text", :value => "#{@prototype.catch_copy}"}/
+
+  .col-md-12
+    /コンセプトテキストの表示
+    %textarea#prototype_concept{:cols => "30", :name => "prototype[concept]", :placeholder => "Concept", :rows => "4"}
+      = @prototype.concept
+
+  .row.text-center.proto-btn
+    %input.btn.btn-lg.btn-primary.btn-block{:name => "commit", :type => "submit", :value => "Publish"}/
+%end
