@@ -5,3 +5,5 @@ class CommentsController < ApplicationController
     redirect_to "/prototypes/#{params[:prototype_id]}"
   end
 end
+
+
