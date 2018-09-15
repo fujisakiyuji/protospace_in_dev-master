@@ -28,3 +28,4 @@ end
 
 
 gem 'kaminari'
+gem 'kaminari-bootstrap'
