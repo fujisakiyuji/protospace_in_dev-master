@@ -30,16 +30,17 @@
       %h4 Concept
       %p
         = @prototype.concept
-    = form_tag("/prototypes/#{@prototype.id}/comments", method: :post) do
-      %textarea{:cols => "30", :name => "text", :placeholder => "コメントする", :rows => "2"}
-      %input{:type => "submit", :value => "SENT"}/
+
+    = form_tag("/prototypes/#{@prototype.id}/comments", method: :post, id: "new_comment") do
+      %textarea{cols: "30", name: "text", placeholder: "コメントする", rows: "2", class: "textbox"}
+      %input{:type => "submit", :value => "COMMENT"}/
 
       .comments
         %h4 ＜コメント一覧＞
         - if @comments
           - @comments.each do |comment|
             %p
-              %strong
+              %strong 
               = comment.text
 
 

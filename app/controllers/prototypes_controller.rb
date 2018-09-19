@@ -20,8 +20,11 @@ class PrototypesController < ApplicationController
   end
 
   def show
-    @prototype = Prototype.find(params[:id])
-    @comments = @prototype.comments
+    
+    @prototype = Prototype.find(params[:id]) 
+    # 未定
+    @comment = Comment.new
+    @comments = @prototype.comments.includes(:user)
   end
 
   def destroy
