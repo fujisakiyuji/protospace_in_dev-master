@@ -2,8 +2,7 @@ $(function(){
   function buildHTML(comment){
     var html = `<p>
                   <strong>
-                    <a href=/users/${comment.user_id}>${comment.user.name}</a>
-                    ：
+                    <a href=/users/${comment.user_id}>${comment.user_name}:</a>
                   </strong>
                   ${comment.text}
                 </p>`

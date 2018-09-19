@@ -39,9 +39,19 @@
         %h4 ＜コメント一覧＞
         - if @comments
           - @comments.each do |comment|
-            %p
-              %strong 
-              = comment.text
+            %div.table
+              %p.comment
+                %strong
+                  %a{href: "/users/#{comment.user_id}"}
+                    = comment.user.name
+                    %span :
+                = comment.text
+              %p.delete
+                %a
+                  delete
+              %p.edit
+                %a
+                  edit
 
 
 

@@ -1,0 +1,25 @@
+.table{
+
+  display: table;
+  margin: 2.5px 0;
+  border: solid 0.2px #f2f2f2;
+  .comment{
+    min-height: 30px;
+    padding-left: 10px;
+    padding-top: 10px;
+    position: relative;
+  }
+
+  .delete{
+    width: 5%;
+    display: table-cell;
+    text-align: center;
+  }
+
+  .edit{
+    width: 5%;
+    display: table-cell;
+    text-align: center;
+  }
+}
+
