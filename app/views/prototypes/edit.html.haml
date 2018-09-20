@@ -1,19 +1,52 @@
-%form#edit_prototype_720.container.proto-new{"accept-charset" => "UTF-8", :action => "/prototypes/#{@prototype.id}", :enctype => "multipart/form-data", :method => "post"}
-  /ここで多分ルーティングを設定している 必須
-  %input{:name => "_method", :type => "hidden", :value => "patch"}/
+.container.proto-new
+  = form_for @prototype do |f|
+    = f.hidden_field :user_id, value: current_user.id
+    .col-md-8.col-md-offset-2
+      %header.row.user-nav.row
+        .col-md-12
+          %h4 Title
+          .proto-new-title
+            = f.text_field :title, required: true, autofocus: true, placeholder: "Input Title"
+      .row
+        .col-md-12
+          %h4 Main Thumbnail
+          .cover-image-upload#main_image_uploader
+            = image_tag(@prototype.set_main_thumbnail.large, class: 'img-responsive img-size-fix', style: "margin: 0 auto;")
+            = f.fields_for :captured_images, @prototype.captured_images.main do |image|
+              %img#selected_image_0
+              = image.file_field :content
+              = image.hidden_field :status, value: "main"
+        .col-md-12
+          %h4 Sub Thumbnails
+          %ul.proto-sub-list.list-group
+            - 1.times do |i|
+              %li.list-group-item.col-md-4
+                .image-upload
+                  = f.fields_for :captured_images, @prototype.captured_images.sub.first do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
 
-  .col-md-12
-    %input#prototype_title.proto-new-title{:name => "prototype[title]", :placeholder => "Title", :type => "text", :value => "#{@prototype.title}"}/
-    /写真をDBから取得している 機能に関わるので必須
-    %img#main_preview{:src => "#{@prototype.set_main_thumbnail.large}"}/
-  .col-md-12
-    /キャッチコピーテキストの表示
-    %input#prototype_catchcopy{:name => "prototype[catch_copy]", :placeholder => "Catch Copy", :type => "text", :value => "#{@prototype.catch_copy}"}/
+              %li.list-group-item.col-md-4
+                .image-upload
+                  = f.fields_for :captured_images, @prototype.captured_images.sub.second do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
 
-  .col-md-12
-    /コンセプトテキストの表示
-    %textarea#prototype_concept{:cols => "30", :name => "prototype[concept]", :placeholder => "Concept", :rows => "4"}
-      = @prototype.concept
+              %li.list-group-item.col-md-4
+                .image-upload
+                  = f.fields_for :captured_images, @prototype.captured_images.sub.third do |image|
+                    %img
+                    = image.file_field :content
+                    = image.hidden_field :status, value: "sub"
 
-  .row.text-center.proto-btn
-    %input.btn.btn-lg.btn-primary.btn-block{:name => "commit", :type => "submit", :value => "Publish"}/
+      .row.proto-description
+        .col-md-12
+          %h4 Catch Copy
+          = f.text_field :catch_copy, require: true, placeholder: "Input Catch Copy"
+        .col-md-12
+          %h4 Concept
+          = f.text_area :concept, require: true, placeholder: "Input Concept"
+      .row.text-center.proto-btn
+        = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"

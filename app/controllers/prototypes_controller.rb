@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:show, :edit]
+  before_action :set_prototype, only: [:show, :edit, :update]
   protect_from_forgery :except => [:edit, :update]
 
   def index
@@ -24,11 +24,13 @@ class PrototypesController < ApplicationController
   end
 
   def edit
+        @prototype = Prototype.find(params[:id])
+
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    prototype.update(prototype_params) if prototype.user_id == current_user.id
+    # prototype = Prototype.find(params[:id])
+    @prototype.update(prototype_params)
     redirect_to :root, notice: 'Prototype was successfully updated.'
   end
 
@@ -44,7 +46,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :user_id,
-      captured_images_attributes: [:content, :status]
+      captured_images_attributes: [:id, :content, :status]
     )
   end
 end
