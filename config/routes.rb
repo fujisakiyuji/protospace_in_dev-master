@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'prototypes#index'
 
 
-  resources :prototypes, only: [:index, :new, :create, :show] do
+  resources :prototypes, only: [:index, :new, :create, :show, :destroy] do
     resources :likes, only: [:create, :destroy]
     resources :comments, only:[:create]
   end
