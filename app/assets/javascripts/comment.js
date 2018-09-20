@@ -1,21 +1,23 @@
 $(function(){
   function buildHTML(comment){
-    var html = `<p>
-                  <strong>
-                    <a href=/users/${comment.user_id}>${comment.user_name}:</a>
-                  </strong>
-                  ${comment.text}
-                </p>
-                <p class="delete">
-                  <a href="#" id="#comment-delete">
-                    delete
-                  </a>
-                </p>
-                <p class="edit">
-                  <a href="#" id="#comment-edit">
-                    edit
-                  </a>
-                </p>
+    var html = `<div class="table">
+                  <p>
+                    <strong>
+                      <a href=/users/${comment.user_id}>${comment.user_name}:</a>
+                    </strong>
+                    ${comment.text}
+                  </p>
+                  <p class="delete">
+                    <a href="#" id="#comment-delete">
+                      delete
+                    </a>
+                  </p>
+                  <p class="edit">
+                    <a href="#" id="#comment-edit">
+                      edit
+                    </a>
+                  </p>
+                </div>
                 `
     return html;
   }
