@@ -16,6 +16,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug'
@@ -25,3 +26,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
+
+
+gem 'kaminari'
+gem 'bootstrap'

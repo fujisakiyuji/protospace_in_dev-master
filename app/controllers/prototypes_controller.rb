@@ -1,8 +1,9 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: :show
+  before_action :set_prototype, only: [:show, :edit, :update]
+  protect_from_forgery :except => [:edit, :update]
 
   def index
-    @prototypes = Prototype.all
+    @prototypes = Prototype.order("created_at DESC").page(params[:page]).per(8)
   end
 
   def new
@@ -34,6 +35,15 @@ class PrototypesController < ApplicationController
     redirect_to "/prototypes"
   end
 
+  def edit
+  end
+
+  def update
+    # prototype = Prototype.find(params[:id])
+    @prototype.update(prototype_params)
+    redirect_to :root, notice: 'Prototype was successfully updated.'
+  end
+
   private
 
   def set_prototype
@@ -46,7 +56,7 @@ class PrototypesController < ApplicationController
       :catch_copy,
       :concept,
       :user_id,
-      captured_images_attributes: [:content, :status]
+      captured_images_attributes: [:id, :content, :status]
     )
   end
 end
